@@ -1,17 +1,17 @@
-# Step 1: Using Nginx image
+# Use official Nginx image
 FROM nginx:alpine
 
-# Step 2: Setup working dir
+# Set working directory
 WORKDIR /usr/share/nginx/html
 
-# Step 3: Remove default Nginx static assets
+# Remove default Nginx content
 RUN rm -rf ./*
 
-# Step 4: Copy files
-COPY . .
+# Copy project files from public folder to Nginx HTML directory
+COPY public/ .
 
-# Step 5: Expose port 80
+# Expose port 80
 EXPOSE 80
 
-# Step 6: Start Nginx
+# Start Nginx
 CMD ["nginx", "-g", "daemon off;"]
