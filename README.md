@@ -15,27 +15,29 @@ This project is a browser-based application built with HTML5, CSS3, and modern J
 ```bash
 
 rms/
-├─ .github/workflows/lint.yml      # CI for linting
-├─ evidence/                       # Accessibility & code evidence
-│   ├─ lighthouse-accessibility.html
-│   ├─ lighthouse-accessibility-screenshot.png
-│   └─ html-snippets.md
-├─ wireframes/                     # Low-fidelity wireframes
-│   ├─ home.png
-│   ├─ data.png
-│   └─ form.png
-├─ public/                         # Static assets
-│   ├─ index.html
-│   ├─ views/data.html
-│   ├─ views/form.html
-│   ├─ css/tokens.css
-│   ├─ css/base.css
-│   ├─ js/a11y.js
-│   └─ img/placeholders.svg
-├─ Dockerfile                      # Nginx container
-├─ docker-compose.yml              # Local dev setup
-├─ package.json                    # Dev scripts
-└─ README.md
+.
+├── docker-compose.yml
+├── Dockerfile
+├── evidence
+│   ├── html-snippets.md
+│   └── lighthouse-accessibility.html
+├── package.json
+├── public
+│   ├── css
+│   │   ├── base.css
+│   │   └── tokens.css
+│   ├── img
+│   ├── index.html
+│   ├── js
+│   │   └── ally.js
+│   └── views
+│       ├── data.html
+│       └── form.html
+├── README.md
+└── wireframes
+    ├── data.png
+    ├── form.png
+    └── home.png
 
 ```
 
