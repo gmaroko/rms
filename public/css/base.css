@@ -1,0 +1,108 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 100%;
+}
+
+body {
+  font-family: var(--font-base);
+  color: var(--color-text);
+  background-color: var(--color-secondary);
+  line-height: 1.5;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+}
+
+/* Skip link */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--color-primary);
+  color: #fff;
+  padding: var(--space-xs);
+  z-index: 100;
+}
+.skip-link:focus {
+  top: 0;
+}
+
+/* Header & Footer */
+header, footer {
+  background-color: var(--color-primary);
+  color: #fff;
+  padding: var(--space-sm);
+}
+
+/* Navigation */
+nav ul {
+  display: flex;
+  gap: var(--space-sm);
+  list-style: none;
+}
+nav a {
+  color: #fff;
+  text-decoration: none;
+}
+nav a:hover,
+nav a:focus {
+  text-decoration: underline;
+}
+
+/* Main content */
+main {
+  padding: var(--space-md);
+}
+
+/* Room lists */
+.room-types, .room-list {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+.room-types li, .room-list li {
+  background: #fff;
+  padding: var(--space-sm);
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Aside filters */
+aside {
+  padding: var(--space-sm);
+  background: #fff;
+  border-left: 1px solid #ccc;
+}
+
+/* Responsive breakpoints */
+@media (min-width: 480px) {
+  nav ul {
+    justify-content: space-around;
+  }
+}
+
+@media (min-width: 768px) {
+  main {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--space-md);
+  }
+}
+
+@media (min-width: 1024px) {
+  .room-list {
+    display: flex;
+    gap: var(--space-sm);
+  }
+}
+
+/* Focus styles */
+:focus-visible {
+  outline: 3px solid var(--color-focus);
+}

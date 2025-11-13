@@ -1,0 +1,11 @@
+{
+  "name": "rms",
+  "version": "1.0.0",
+  "description": "Campus room management system webapp",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
