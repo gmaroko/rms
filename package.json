@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "docker build -t 06992014/rms:latest . && docker run -d -p 8080:80 06992014/rms:latest",
+    "local": "docker-compose up -d",
     "docker-build": "docker build -t 06992014/rms:latest . && docker push 06992014/rms:latest"
   },
   "author": "Project Alpha",
