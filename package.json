@@ -10,5 +10,10 @@
     "docker-build": "docker build -t 06992014/rms:latest . && docker push 06992014/rms:latest"
   },
   "author": "Project Alpha",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "htmlhint": "^1.7.1",
+    "stylelint": "^16.25.0",
+    "stylelint-config-standard": "^39.0.1"
+  }
 }
