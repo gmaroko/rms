@@ -29,6 +29,7 @@ body {
   padding: var(--space-xs);
   z-index: 100;
 }
+
 .skip-link:focus {
   top: 0;
 }
@@ -46,11 +47,14 @@ nav ul {
   gap: var(--space-sm);
   list-style: none;
 }
+
 nav a {
   color: #fff;
   text-decoration: none;
 }
+
 nav a:hover,
+
 nav a:focus {
   text-decoration: underline;
 }
@@ -66,6 +70,7 @@ main {
   gap: var(--space-sm);
   flex-wrap: wrap;
 }
+
 .room-types li, .room-list li {
   background: #fff;
   padding: var(--space-sm);
