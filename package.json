@@ -4,8 +4,10 @@
   "description": "Campus room management system webapp",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "docker build -t 06992014/rms:latest . && docker run -d -p 8080:80 06992014/rms:latest",
+    "docker-build": "docker build -t 06992014/rms:latest . && docker push 06992014/rms:latest"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "Project Alpha",
+  "license": "MIT"
 }
