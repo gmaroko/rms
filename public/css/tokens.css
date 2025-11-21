@@ -1,9 +1,9 @@
 :root {
   /* Colors */
-  --color-primary: #004080;  
+  --color-primary: #004080;
   --color-secondary: #f4f4f4;
-  --color-text: #222;   
-  --color-focus: #ffbf47; 
+  --color-text: #222;
+  --color-focus: #ffbf47;
   --color-accent: #007acc;
 
   /* Spacing */
