@@ -19,20 +19,29 @@ rms/
 ├── docker-compose.yml
 ├── Dockerfile
 ├── evidence
-│   ├── html-snippets.md
-│   └── lighthouse-accessibility.html
+│   ├── html-snippets.md
+│   └── lighthouse-accessibility.html
+├── jest.config.js
 ├── package.json
 ├── public
-│   ├── css
-│   │   ├── base.css
-│   │   └── tokens.css
-│   ├── img
-│   ├── index.html
-│   ├── js
-│   │   └── ally.js
-│   └── views
-│       ├── data.html
-│       └── form.html
+│   ├── css
+│   │   ├── base.css
+│   │   └── tokens.css
+│   ├── index.html
+│   ├── js
+│   │   ├── a11y.js
+│   │   ├── app.js
+│   │   └── modules
+│   │       ├── bookings.js
+│   │       ├── rooms.js
+│   │       ├── router.js
+│   │       ├── state.js
+│   │       ├── __tests__
+│   │       │   └── utils.test.js
+│   │       └── utils.js
+│   └── views
+│       ├── data.html
+│       └── form.html
 ├── README.md
 └── wireframes
     ├── data.png
