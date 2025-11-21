@@ -4,7 +4,7 @@
   "description": "Campus room management system webapp",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "dev": "docker build -t 06992014/rms:latest . && docker run -d -p 8080:80 06992014/rms:latest",
     "local": "docker-compose up -d",
     "docker-build": "docker build -t 06992014/rms:latest . && docker push 06992014/rms:latest"
@@ -13,6 +13,7 @@
   "license": "MIT",
   "devDependencies": {
     "htmlhint": "^1.7.1",
+    "jest": "^30.2.0",
     "stylelint": "^16.25.0",
     "stylelint-config-standard": "^39.0.1"
   }

@@ -1,5 +1,5 @@
 
-name: Lint HTML and CSS
+name: Run Unit Tests
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
     branches: [ main ]
 
 jobs:
-  lint:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,11 +21,7 @@ jobs:
           node-version: '18'
 
       - name: Install dependencies
-        run: |
-          npm install htmlhint stylelint stylelint-config-standard --save-dev
+        run: npm install
 
-      - name: Lint HTML files
-        run: npx htmlhint "public/**/*.html" --config .htmlhintrc
-
-      - name: Lint CSS files
-        run: npx stylelint "public/css/**/*.css" --config .stylelintrc.json
+      - name: Run Jest tests
+        run: npm test

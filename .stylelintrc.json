@@ -2,11 +2,7 @@
 {
   "extends": "stylelint-config-standard",
   "rules": {
-    "color-no-invalid-hex": true,
-    "declaration-block-no-duplicate-properties": true,
-    "block-no-empty": true,
-    "unit-no-unknown": true,
-    "rule-empty-line-before": null,
-    "media-feature-range-notation": null
+    "indentation": 2,
+    "string-quotes": "double"
   }
 }
