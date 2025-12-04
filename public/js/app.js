@@ -1,14 +1,22 @@
 import { initRouter } from './modules/router.js';
 import { state } from './modules/state.js';
 
-// Initialize application
 document.addEventListener('DOMContentLoaded', () => {
-  // Load initial data -> we'll later use API of from DB
-  state.initRooms([
-    { id: 1, name: 'Room A', type: 'single', capacity: 2 },
-    { id: 2, name: 'Room B', type: 'double', capacity: 4 },
-    { id: 3, name: 'Room C', type: 'dorm', capacity: 6 }
-  ]);
-
-  initRouter(); // routing
+  // Fetch initial data from backend API
+  fetch('/api/rooms')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`Network error: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      state.initRooms(data);   // hydrate state with API data
+      initRouter();            // start routing after data is ready
+    })
+    .catch(error => {
+      console.error('Failed to load rooms:', error);
+      // Fallback: start router even if API fails
+      initRouter();
+    });
 });

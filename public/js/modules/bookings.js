@@ -1,4 +1,3 @@
-
 import { state } from './state.js';
 import { validateDate } from './utils.js';
 
@@ -28,12 +27,32 @@ export function renderBookingForm() {
       roomType: formData.get('roomType')
     };
 
+    // Validate date before sending
     if (!validateDate(booking.date)) {
       alert('Invalid date!');
       return;
     }
 
-    state.addBooking(booking);
-    alert('Booking successful!');
+    // Send booking to backend API
+    fetch('/api/bookings', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(booking)
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Booking failed: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(savedBooking => {
+        // Update local state with saved booking
+        state.addBooking(savedBooking);
+        alert('Booking successful!');
+      })
+      .catch(error => {
+        console.error(error);
+        alert('Booking failed, please try again.');
+      });
   });
 }
