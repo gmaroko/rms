@@ -1,17 +1,18 @@
-# Use official Nginx image
-FROM nginx:alpine
+# Use official Node.js image
+FROM node:20-alpine
 
-# Set working directory
-WORKDIR /usr/share/nginx/html
+# Set working directory inside container
+WORKDIR /app
 
-# Remove default Nginx content
-RUN rm -rf ./*
+# Copy package files and install dependencies
+COPY package*.json ./
+RUN npm install --production
 
-# Copy project files from public folder to Nginx HTML directory
-COPY public/ .
+# Copy the rest of the project
+COPY . .
 
-# Expose port 80
-EXPOSE 80
+# Expose Express server port
+EXPOSE 3000
 
-# Start Nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Start the unified app (frontend + backend)
+CMD ["npm", "start"]
