@@ -1,22 +1,25 @@
 import { initRouter } from './modules/router.js';
 import { state } from './modules/state.js';
 
-document.addEventListener('DOMContentLoaded', () => {
-  // Fetch initial data from backend API
-  fetch('/api/rooms')
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`Network error: ${response.status}`);
-      }
-      return response.json();
-    })
-    .then(data => {
-      state.initRooms(data);   // hydrate state with API data
-      initRouter();            // start routing after data is ready
-    })
-    .catch(error => {
-      console.error('Failed to load rooms:', error);
-      // Fallback: start router even if API fails
-      initRouter();
-    });
+document.addEventListener('DOMContentLoaded', async () => {
+  // First, load any locally saved bookings (so UI has something immediately)
+  state.loadBookingsFromLocal();
+
+  try {
+    // Fetch rooms from backend API
+    const resRooms = await fetch('/api/rooms');
+    if (!resRooms.ok) throw new Error(`Rooms API error: ${resRooms.status}`);
+    const rooms = await resRooms.json();
+    state.initRooms(rooms);
+
+    // Fetch bookings from backend API
+    await state.loadBookings();
+  } catch (err) {
+    console.error('API fetch failed, using local fallback:', err);
+    // Rooms will remain empty if API fails
+    // Bookings already loaded from localStorage above
+  }
+
+  // Start router after data is ready
+  initRouter();
 });
