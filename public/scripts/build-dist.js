@@ -2,28 +2,27 @@ import fs from 'fs';
 import path from 'path';
 import { build } from 'esbuild';
 import { minify } from 'html-minifier-terser';
-import crypto from 'crypto';
 
 const projectRoot = path.resolve('.');
 const publicDir = path.join(projectRoot, 'public');
 const outDir = path.join(publicDir, 'dist');
 
-// Ensure out folder exists
 if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
 
-async function runBuild() {
-  console.log('Starting esbuild...');
+async function buildSite() {
+  console.log('Starting esbuild bundling...');
 
-  // Build with esbuild
+  // Run esbuild
   const result = await build({
     entryPoints: [path.join(publicDir, 'js', 'app.js')],
     bundle: true,
     minify: true,
     sourcemap: true,
-    splitting: true, // allow code splitting for dynamic imports
+    splitting: true,
     format: 'esm',
     outdir: outDir,
-    entryNames: 'bundle',
+    entryNames: 'bundle-[hash]',
+    chunkNames: 'chunk-[hash]',
     assetNames: 'assets/[name]-[hash]',
     metafile: true,
     write: true,
@@ -31,49 +30,41 @@ async function runBuild() {
       '.png': 'file',
       '.jpg': 'file',
       '.svg': 'file',
-      '.css': 'css',
+      '.css': 'css'
     }
   });
 
-  // Save metafile for bundle analysis
+  // Save metafile
   const metaPath = path.join(outDir, 'meta.json');
   fs.writeFileSync(metaPath, JSON.stringify(result.metafile, null, 2));
-  console.log('esbuild finished. Metafile written to', metaPath);
+  console.log('Wrote metafile to', metaPath);
 
-  // Determine generated JS & CSS files by scanning outDir
+  // Find generated files
   const files = fs.readdirSync(outDir);
   const jsFiles = files.filter(f => f.endsWith('.js'));
   const cssFiles = files.filter(f => f.endsWith('.css'));
 
-  const jsFile = jsFiles.length ? jsFiles[0] : null;
-  const cssFile = cssFiles.length ? cssFiles[0] : null;
-
-  console.log('Generated JS file:', jsFile);
-  console.log('Generated CSS file:', cssFile);
-
   // Read original index.html
-  const indexHtmlPath = path.join(publicDir, 'index.html');
-  if (!fs.existsSync(indexHtmlPath)) {
-    console.warn('public/index.html not found — skipping HTML generation');
+  const indexSrc = path.join(publicDir, 'index.html');
+  if (!fs.existsSync(indexSrc)) {
+    console.warn('public/index.html not found — skipping HTML processing');
     return;
   }
 
-  let html = fs.readFileSync(indexHtmlPath, 'utf8');
+  let html = fs.readFileSync(indexSrc, 'utf8');
 
-  // Replace CSS references: remove existing <link rel="stylesheet"...> for base.css/tokens.css
+  // Remove original CSS and JS references to base assets
   html = html.replace(/<link[^>]*href="[^"]*css\/tokens\.css"[^>]*>/g, '');
   html = html.replace(/<link[^>]*href="[^"]*css\/base\.css"[^>]*>/g, '');
-
-  // Remove existing script tag that references js/app.js
   html = html.replace(/<script[^>]*src="[^"]*js\/app\.js"[^>]*><\/script>/g, '');
 
-  // Inject new CSS and JS references (with cache-busting based on filenames)
-  const cssTag = cssFile ? `<link rel="stylesheet" href="${cssFile}">` : '';
-  const jsTag = jsFile ? `<script type="module" src="${jsFile}"></script>` : '';
+  // Inject generated CSS and JS tags (use first CSS and include all JS chunks)
+  const cssTag = cssFiles.length ? `<link rel="stylesheet" href="${cssFiles[0]}">` : '';
+  // collect all .js files and create module script tags
+  const jsTags = jsFiles.map(f => `<script type="module" src="${f}"></script>`).join('\n  ');
 
-  // Inject before </head> and before </body>
   html = html.replace('</head>', `  ${cssTag}\n</head>`);
-  html = html.replace('</body>', `  ${jsTag}\n</body>`);
+  html = html.replace('</body>', `  ${jsTags}\n</body>`);
 
   // Minify HTML
   const minified = await minify(html, {
@@ -85,15 +76,13 @@ async function runBuild() {
     minifyJS: true
   });
 
-  // Write to public/dist/index.html
   const outIndex = path.join(outDir, 'index.html');
   fs.writeFileSync(outIndex, minified, 'utf8');
-  console.log('Wrote optimized HTML to', outIndex);
 
-  console.log('Build complete. Dist folder is:', outDir);
+  console.log('Build complete. Dist files in', outDir);
 }
 
-runBuild().catch(err => {
+buildSite().catch(err => {
   console.error('Build failed:', err);
   process.exit(1);
 });
