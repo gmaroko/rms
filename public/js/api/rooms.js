@@ -5,9 +5,14 @@ import { sanitizeString, sanitizeInteger } from './validate.js';
 const router = Router();
 
 router.get('/', async (req, res) => {
-  const db = await initDB();
-  const rooms = await db.all('SELECT * FROM rooms ORDER BY id ASC');
-  res.json(rooms);
+  try {
+    const db = await initDB();
+    const rooms = await db.all('SELECT * FROM rooms ORDER BY id ASC');
+    res.json(rooms);
+  } catch (err) {
+    console.error('Error fetching rooms', err);
+    res.status(500).json({ error: 'Server error' });
+  }
 });
 
 router.post('/', async (req, res) => {

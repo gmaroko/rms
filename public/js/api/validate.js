@@ -6,9 +6,10 @@ export function sanitizeString(value = '', maxLen = 200) {
 
 export function isISODateString(s) {
   if (typeof s !== 'string') return false;
-  // YYYY-MM-DD basic check
+  // Basic YYYY-MM-DD format check
   if (!/^\d{4}-\d{2}-\d{2}$/.test(s)) return false;
-  // Basic semantic check
+
+  // Basic semantic month/day checks
   const [y, m, d] = s.split('-').map(Number);
   if (m < 1 || m > 12) return false;
   if (d < 1 || d > 31) return false;
@@ -16,7 +17,8 @@ export function isISODateString(s) {
 }
 
 export function isValidRoomType(t) {
-  return ['single', 'double', 'dorm'].includes(String(t).trim());
+  const allowed = ['single', 'double', 'dorm'];
+  return allowed.includes(String(t).trim());
 }
 
 export function sanitizeInteger(value, fallback = 0) {

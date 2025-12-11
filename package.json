@@ -8,19 +8,22 @@
     "dev": "node public/js/api/server.js",
     "start": "node public/js/api/server.js",
     "local": "docker-compose up -d",
-    "docker-build": "docker build -t 06992014/rms:latest . && docker push 06992014/rms:latest"
+    "docker-build": "docker build -t 06992014/rms:latest . && docker push 06992014/rms:latest",
+    "build:dist": "node scripts/build-dist.js"
   },
   "author": "Project Alpha",
   "license": "MIT",
   "type": "module",
   "dependencies": {
-    "compression": "^1.8.1",
+    "compression": "^1.7.4",
     "cors": "^2.8.5",
     "express": "^4.19.2",
     "sqlite": "^5.1.1",
     "sqlite3": "^5.1.7"
   },
   "devDependencies": {
+    "esbuild": "^0.18.20",
+    "html-minifier-terser": "^6.1.0",
     "htmlhint": "^1.7.1",
     "jest": "^30.2.0",
     "stylelint": "^16.26.0",
