@@ -1,7 +1,7 @@
 :root {
-  --color-primary: #F47B20;
-  --color-primary-dark: #d76a18;
-  --color-muted: #6c757d;
+  --color-primary: #2086f4;
+  --color-primary-dark: #4fb4dd;
+  --color-muted: #8aa0b2;
   --radius: 12px;
   --max-width: 1100px;
   --focus-ring: 3px solid rgba(244, 123, 32, 0.2);
