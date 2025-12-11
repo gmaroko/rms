@@ -1,6 +1,11 @@
 import sqlite3 from 'sqlite3';
 import { open } from 'sqlite';
 
+/**
+ * Initialize SQLite database.
+ * - Creates tables if not present.
+ * - Seeds only in dev serve.
+ */
 export async function initDB() {
   const db = await open({
     filename: './database.sqlite',
@@ -26,7 +31,13 @@ export async function initDB() {
     );
   `);
 
-  // Auto‑seed rooms if empty
+  const isProd = process.env.NODE_ENV === 'production';
+
+  if (isProd) {
+    console.log("[DB] Production mode detected — skipping seeding.");
+    return db;
+  }
+
   const roomCount = await db.get('SELECT COUNT(*) as count FROM rooms');
   if (roomCount.count === 0) {
     const types = ['single', 'double', 'dorm'];
@@ -36,6 +47,7 @@ export async function initDB() {
       const type = types[Math.floor(Math.random() * types.length)];
       const capacity = type === 'single' ? 2 : type === 'double' ? 4 : 6;
       const name = `Room ${names[Math.floor(Math.random() * names.length)]}`;
+
       await db.run(
         'INSERT INTO rooms (name, type, capacity) VALUES (?, ?, ?)',
         [name, type, capacity]
@@ -44,7 +56,7 @@ export async function initDB() {
     console.log('Seeded random rooms');
   }
 
-  // Auto‑seed bookings if empty
+  // Seed bookings if empty
   const bookingCount = await db.get('SELECT COUNT(*) as count FROM bookings');
   if (bookingCount.count === 0) {
     const people = ['Alice', 'Bob', 'Charlie', 'Diana'];

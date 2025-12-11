@@ -1,3 +1,6 @@
+import '../css/tokens.css';
+import '../css/base.css';
+
 import { initRouter } from './modules/router.js';
 import { state } from './modules/state.js';
 

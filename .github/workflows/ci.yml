@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+    branches: [ "*" ]
+  pull_request:
+    branches: [ "*" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Use Node 18
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run HTMLHint
+        run: npx htmlhint "public/**/*.html"
+
+      - name: Run Stylelint
+        run: npx stylelint "public/**/*.css"
+
+      - name: Run Jest tests
+        run: npm test
+      
+      - name: Build optimized assets
+        run: npm run build:dist
+
+      - name: Upload dist build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: rms-dist
+          path: public/dist/
