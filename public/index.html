@@ -2,44 +2,165 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Room Booking System" />
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Room Booking System — Campus Life" />
   <title>RMS - Home</title>
-  <link rel="stylesheet" href="css/tokens.css">
-  <link rel="stylesheet" href="css/base.css">
+
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/base.css" />
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-7q5G8k3gR4x6c8R5vW+GdhsG5tJj0q2x3b6F7zL6k3Yb9qD4vZD5pH1c4tQ8J9eB" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="css/theme.css" />
+
+  <!-- page-level: small inline style fallback (keeps accessible focus visible) -->
+  <style>
+    .skip-link {
+      position: absolute;
+      left: -999px;
+      top: auto;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+    .skip-link:focus {
+      left: 10px;
+      top: 10px;
+      width: auto;
+      height: auto;
+      background: #000;
+      color: #fff;
+      padding: 8px 12px;
+      z-index: 9999;
+      border-radius: 4px;
+    }
+  </style>
 </head>
 
-<body>
+<body class="bg-light text-body">
+
   <a href="#main" class="skip-link">Skip to main content</a>
 
-  <header>
-    <nav aria-label="Main navigation">
-      <ul>
-        <li><a href="#/" aria-current="page">Home</a></li>
-        <li><a href="#/rooms">Rooms</a></li>
-        <li><a href="#/book">Book a Room</a></li>
-      </ul>
-    </nav>
+  <!-- Header / Navbar -->
+  <header class="bg-white shadow-sm">
+    <nav class="navbar navbar-expand-lg container" aria-label="Main navigation">
+      <div class="container-fluid px-0">
+        <a class="navbar-brand d-flex align-items-center gap-2" href="/">
+          <svg width="36" height="36" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <rect width="24" height="24" rx="4" fill="#F47B20"></rect>
+            <text x="12" y="16" font-size="12" text-anchor="middle" fill="white" font-family="sans-serif">RMS</text>
+          </svg>
+          <span class="brand-text">Campus Life</span>
+        </a>
 
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+          aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainNav">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item"><a class="nav-link active" aria-current="page" href="#/">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#/rooms">Rooms</a></li>
+            <li class="nav-item"><a class="nav-link" href="#/book">Book a Room</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
   </header>
 
-  <main id="main" tabindex="-1">
-    <h1>Welcome to Campus Life</h1>
-    <section>
-      <h2>Explore Room Types</h2>
-      <ul class="room-types">
-        <li>Room Type 1</li>
-        <li>Room Type 2</li>
-        <li>Room Type 3</li>
-      </ul>
+  <!-- Main content container -->
+  <main id="main" tabindex="-1" class="container py-5">
+
+    <!-- Hero -->
+    <section class="row align-items-center mb-5">
+      <div class="col-lg-7">
+        <h1 class="display-5 fw-bold">Welcome to Campus Life</h1>
+        <p class="lead text-muted">Find and book the right room for your study group, event, or meeting — fast and
+          accessible.</p>
+
+        <div class="d-flex gap-2 mt-4">
+          <a class="btn btn-primary btn-lg" href="#/rooms">Browse Rooms</a>
+          <a class="btn btn-outline-secondary btn-lg" href="#/book">Book a Room</a>
+        </div>
+
+        <ul class="list-unstyled mt-4 text-muted small">
+          <li>• Accessible markup & keyboard-first navigation</li>
+          <li>• Progressive enhancement and local persistence</li>
+        </ul>
+      </div>
+
+      <div class="col-lg-5 d-none d-lg-block">
+        <div class="card shadow-sm">
+          <img src="images/campus-illustration.svg" alt="Illustration of campus life" class="card-img-top"
+            loading="lazy">
+          <div class="card-body">
+            <p class="mb-0">Rooms tailored for group study, quiet work, or classroom-style sessions.</p>
+          </div>
+        </div>
+      </div>
     </section>
+
+    <!-- Room types -->
+    <section aria-labelledby="exploreHeading" class="mb-5">
+      <h2 id="exploreHeading" class="h4 mb-3">Explore Room Types</h2>
+
+      <div class="row row-cols-1 row-cols-md-3 g-4 room-types-grid">
+        <article class="col">
+          <div class="card h-100">
+            <div class="card-body">
+              <h3 class="card-title h5">Single</h3>
+              <p class="card-text text-muted">Private room suitable for one or two people.</p>
+              <p class="mb-0"><strong>Capacity:</strong> 2</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="col">
+          <div class="card h-100">
+            <div class="card-body">
+              <h3 class="card-title h5">Double</h3>
+              <p class="card-text text-muted">Larger room for small groups or meetings.</p>
+              <p class="mb-0"><strong>Capacity:</strong> 4</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="col">
+          <div class="card h-100">
+            <div class="card-body">
+              <h3 class="card-title h5">Dorm-style</h3>
+              <p class="card-text text-muted">Open-plan rooms for multiple occupants.</p>
+              <p class="mb-0"><strong>Capacity:</strong> 6</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Recent bookings / CTA -->
+    <section class="mb-5">
+      <h2 class="h5 mb-3">Quick actions</h2>
+      <div class="d-flex gap-3">
+        <a class="btn btn-outline-primary" href="#/rooms">View all rooms</a>
+        <a class="btn btn-outline-success" href="#/book">Start a booking</a>
+      </div>
+    </section>
+
   </main>
 
-  <footer>
-    <p>&copy; 2025 Project Alpha</p>
+  <!-- Footer -->
+  <footer class="bg-white border-top py-4">
+    <div class="container text-center small text-muted">
+      <p class="mb-0">&copy; 2025 Project Alpha — Campus Life</p>
+    </div>
   </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-9NDLQq0C1D3kVt3y0W2YV+N2y3Qf8K0a7y1b6m3iN5j8fQ2Lh3sK5c8a1bT3w4y" crossorigin="anonymous"></script>
+
   <script src="js/a11y.js"></script>
   <script type="module" src="js/app.js"></script>
 </body>
