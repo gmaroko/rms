@@ -13,14 +13,13 @@ body {
   color: var(--color-text);
   background-color: var(--color-secondary);
   line-height: 1.5;
-
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
 main {
-  flex: 1; 
+  flex: 1;
 }
 
 /* Skip link */
@@ -46,7 +45,9 @@ footer {
 
 nav ul,
 nav a {
-  all: unset; /* Reset any inherited styling */
+  all: unset;
+
+  /* Reset any inherited styling */
 }
 
 /* Main content spacing */
@@ -79,7 +80,7 @@ aside {
   border-left: 1px solid #ccc;
 }
 
-@media (min-width: 768px) {
+@media (width >=768px) {
   main[data-layout="split"] {
     display: grid;
     grid-template-columns: 2fr 1fr;

@@ -1,5 +1,4 @@
-export default {
-  testEnvironment: "node",
-  transform: {},
-  verbose: true
+module.exports = {
+  clearMocks: true,
+  testEnvironment: 'node',
 };

@@ -4,7 +4,7 @@
   --color-muted: #8aa0b2;
   --radius: 12px;
   --max-width: 1100px;
-  --focus-ring: 3px solid rgba(244, 123, 32, 0.2);
+  --focus-ring: 3px solid rgb(244 123 32 / 20%);
 }
 
 body {
@@ -17,6 +17,7 @@ body {
   background-color: var(--color-primary);
   border-color: var(--color-primary);
 }
+
 .btn-primary:hover,
 .btn-primary:focus {
   background-color: var(--color-primary-dark);
@@ -37,22 +38,24 @@ body {
 .room-types-grid .card {
   transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
+
 .room-types-grid .card:hover,
 .room-types-grid .card:focus-within {
   transform: translateY(-6px);
-  box-shadow: 0 8px 20px rgba(18, 22, 28, 0.08);
+  box-shadow: 0 8px 20px rgb(18 22 28 / 8%);
 }
 
 /* Forms */
 .form-label {
   font-weight: 600;
 }
+
 input[type="text"],
 input[type="date"],
 select,
 textarea {
   border-radius: 8px;
-  border: 1px solid rgba(17, 24, 39, 0.08);
+  border: 1px solid rgb(17 24 39 / 8%);
 }
 
 :focus {
@@ -76,7 +79,7 @@ footer {
   border: 0 !important;
 }
 
-@media (min-width: 992px) {
+@media (width >=992px) {
   main.container {
     max-width: var(--max-width);
   }
